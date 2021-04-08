@@ -10,6 +10,7 @@
                 <!-- <textarea name="myTextBox" cols="50" rows="5"></textarea> -->
                 
                 <?php
+                // JACOB LAVER EN TEST 1.0
                     include "includes/dbh.inc.php";
 
                     // $_SESSION['brugernavn']
