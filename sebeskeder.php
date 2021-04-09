@@ -14,7 +14,7 @@
                     include "includes/dbh.inc.php";
 
                     // $_SESSION['brugernavn']
-                    $sql = "SELECT besked_indhold, afsender_brugernavn FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id from besked_modtager where besked_modtager.modtager_brugernavn = 'jacobz');";
+                    $sql = "SELECT besked_indhold, afsender_brugernavn FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id from besked_modtager where besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."')";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
