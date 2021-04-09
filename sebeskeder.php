@@ -21,6 +21,7 @@
                             //echo "<p1>Afsender: </p1>".$row["afsender_brugernavn"]."<br>".$row["besked_indhold"]."<br>"."<br>";
                             echo "<div id='beskedmodul'> <h2>Afsender: ".$row["afsender_brugernavn"]."</h2><p>".$row["besked_indhold"]."</p></div>";
                         }
+                        //Dette er en test besked til test af github (rasmus)
                     }
 
                 ?>
