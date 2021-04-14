@@ -2,7 +2,7 @@
     include_once 'header.php';
 ?>
             
-            <section class="index-intro">
+            <section class="sebeskeder-section">
                 <h1>Se beskeder</h1>
                 <p>På denne sider kommer beskeder til at være (≧∇≦)ﾉ</p>
                 
