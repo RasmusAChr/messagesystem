@@ -1,5 +1,4 @@
 <!-- Her bliver headeren inkluderet -->
-<!-- Det her er Rasmus Branch -->
 
 <?php
     include_once 'header.php';
