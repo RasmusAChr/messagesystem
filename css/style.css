@@ -11,6 +11,15 @@ body {
     margin:auto;
     padding: 20px;
 }
+.sebeskeder-section {
+  background-color: white;
+  text-align: center;
+  width: 600px;
+  height: auto;
+  display:block;
+  margin:auto;
+  padding: 20px;
+}
 .signup-form {
     background-color: white;
     text-align: center;
