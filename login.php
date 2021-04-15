@@ -1,4 +1,5 @@
 <!-- Her bliver headeren inkluderet -->
+<!-- Hejsa -->
 <?php
     include_once 'header.php';
 ?>
