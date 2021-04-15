@@ -2,44 +2,44 @@
 
 function emptyInputSignup($brugernavn, $fornavn, $efternavn, $password, $passwordgentag) 
 {
-    $result;
-    if (empty($brugernavn) || empty($fornavn) || empty($efternavn) || empty($password) || empty($passwordgentag))
+    $result; // Laver variabel som skal indeholde et resultat.
+    if (empty($brugernavn) || empty($fornavn) || empty($efternavn) || empty($password) || empty($passwordgentag)) // Tjekker om nogle af felterne er tomme.
     {
-        $result = true;
+        $result = true; // Ja mindst et felt er tomt
     }
     else 
     {
-        $result = false;
+        $result = false; // Nej ingen felter er ikke tomme.
     }
-    return $result;
+    return $result; // Retunerer resultatet til der hvor funktionen blev kaldt.
 }
 
 function invalidBrugernavn($brugernavn) 
 {
-    $result;
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $brugernavn))
+    $result; // Laver variabel som skal indeholde et resultat.
+    if (!preg_match("/^[a-zA-Z0-9]*$/", $brugernavn)) // Tjekker om der er andre tegn end dem som er angivet i preg_match(), som er en php funktion.
     {
-        $result = true;
+        $result = true; // Ja der er andre tegn end dem angivet.
     }
     else 
     {
-        $result = false;
+        $result = false; // Nej der er ingen andre tegn end dem angivet.
     }
-    return $result;
+    return $result; // Retunerer resultatet til der hvor funktionen blev kaldt.
 }
 
 function passwordMatch($password, $passwordgentag) 
 {
-    $result;
-    if ($password !== $passwordgentag)
+    $result; // Laver variabel som skal indeholde et resultat.
+    if ($password !== $passwordgentag) // Har brugeren skrevet det samme kodeord 2 gange?
     {
-        $result = true;
+        $result = true; // Brugeren har skrevet det samme begge steder.
     }
     else 
     {
-        $result = false;
+        $result = false; // Brugeren har ikke skrevet det samme begge steder.
     }
-    return $result;
+    return $result; // Retunerer resultatet til der hvor funktionen blev kaldt.
 }
 
 function brugernavneksisterer($conn, $brugernavn) 
@@ -97,14 +97,14 @@ function createUser($conn, $brugernavn, $fornavn, $efternavn, $password)
 
 function emptyInputLogin($brugernavn, $password) 
 {
-    $result;
+    $result; // Laver variabel som skal indeholde et resultat.
     if (empty($brugernavn) || empty($password)) {
         $result = true;
     }
     else {
         $result = false;
     }
-    return $result;
+    return $result; // Retunerer resultatet til der hvor funktionen blev kaldt.
 }
 
 function loginUser($conn, $brugernavn, $password) {
