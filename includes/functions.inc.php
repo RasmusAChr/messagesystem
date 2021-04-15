@@ -129,5 +129,41 @@ function loginUser($conn, $brugernavn, $password) {
         header("location: ../index.php");
         exit();
     }
+}
+
+function sendMessage($conn, $modtager, $besked) 
+{
+    
+    $ModtagerEksistere = brugernavneksisterer($conn, $modtager);
+
+    if ($ModtagerEksistere == false) {
+        header("location: ../sendbeskeder.php?error=wrongmodtager");
+        exit();
+    }
+
+    $sql = "INSERT INTO besked (afsender_brugernavn, besked_indhold) VALUES (?,?)";
+    $stmt = mysqli_stmt_init($conn);
+
+    // Tjekker om forbindelsen fejler
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../sendbeskeder.php?error=stmtfailed");
+        exit();
+    }
+
+    session_start();        // Måske riski (research)
+    $afsender = $_SESSION["brugernavn"];
+
+    mysqli_stmt_bind_param($stmt, "ss", $afsender, $besked);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    // Her skal der laves relationstabel!
+
+
+
+    // Når beskeden er sendt - allersidste
+    header("location: ../sendbeskeder.php?error=none");
+    exit();
 
 }
+

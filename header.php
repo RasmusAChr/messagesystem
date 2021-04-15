@@ -24,7 +24,7 @@
                             
                             // Viser disse sider i navigationsbaren, hvis man er logget ind.
                             echo "<li><a href='includes/logout.inc.php'>Log ud</a></li>";
-                            echo "<li><a href='index.php'>Send besked</a></li>";
+                            echo "<li><a href='sendbeskeder.php'>Send besked</a></li>";
                             echo "<li><a href='sebeskeder.php'>Se beskeder</a></li>";
                         }
                         else { // Hvis brugeren ikke er logget ind.
