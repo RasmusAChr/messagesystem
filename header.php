@@ -21,7 +21,6 @@
                 <ul>
                     <?php
                         if (isset($_SESSION["brugernavn"])) { // Hvis brugeren er logget ind, så vis nedenstående (Hvis sessionens brugernavn er sat, så er udsagnet true).
-                            
                             // Viser disse sider i navigationsbaren, hvis man er logget ind.
                             echo "<li><a href='includes/logout.inc.php'>Log ud</a></li>";
                             echo "<li><a href='sendbeskeder.php'>Send besked</a></li>";
@@ -35,6 +34,11 @@
                         }
                     ?>
                     <li><a href='index.php'>Hjem</a></li>
+                    <?php
+                    if (isset($_SESSION["brugernavn"])) {
+                        echo "<li><p style='color:white;position:fixed;left:20px;'>".$_SESSION["brugernavn"]."</p></li>";
+                    }
+                    ?>
                 </ul>
             </div>
         </nav>
