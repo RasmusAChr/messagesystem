@@ -14,6 +14,7 @@
 
                 <?php 
                     // php kode her
+                    // Tjek for errors i url (se andre sider for inspiration)
                 ?>
                
             </section>
