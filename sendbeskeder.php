@@ -15,6 +15,10 @@
                 <?php 
                     // php kode her
                     // Tjek for errors i url (se andre sider for inspiration)
+                        // Empty input
+                        // Wrong modtager
+                        // stmtfailed (Ingen forbindelse til database)
+                        // error=none (ved ikke om vi skal gøre noget ved)
                 ?>
                
             </section>
