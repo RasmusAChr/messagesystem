@@ -4,7 +4,7 @@
             
             <section class="sebeskeder-section">
                 <h1>Send beskeder</h1>
-                <p>På denne side kommer man til at kunne oprette beskeder</p>
+                <p>På denne side kommer man til at kunne oprette og sende beskeder</p>
                 
                 <form action="includes/sendbeskeder.inc.php" method="post"> <!-- Data som bliver sendt med method=post er gemt inde i HTTP forespørgslen. Bruges til sensitiv data. -->
                     <input type="text" name="modtager" placeholder="Modtager...">
