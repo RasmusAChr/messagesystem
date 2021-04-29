@@ -23,7 +23,7 @@
                     }
 
                     else { //hvis der ikke er indtastet et brugernavn
-                        $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."') ORDER BY tidspunkt DESC";
+                        $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."')";
                     }
                     
                     //$sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."')";
