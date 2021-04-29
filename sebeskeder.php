@@ -8,23 +8,25 @@
                 <!-- Laver kanppen til søgefunktionen -->
                 <form action="includes/sebeskeder.inc.php" method="post"> <!-- Data som bliver sendt med method=post er gemt inde i HTTP forespørgslen. Bruges til sensitiv data. -->
                     <input id="søgBruger" type="text" name="brugernavn" placeholder="Søg efter bruger...">
-                    <button type="submit" name="submit">Søg</button>
+                    <button id="søg" type="submit" name="submit">Søg</button>
                 </form>
                 
                 <?php
                     include "includes/dbh.inc.php"; // Her inkluderes databasen, da den skal bruges til at finde beskeder til brugeren.
 
-                    if (isset($_GET["brugernavn"])) {
+                    if (isset($_GET["brugernavn"])) { // Hvis der er skrevet noget i søgefeltet henter den brugernavnet i variablen $afsender_brugernavn.
                         $afsender_brugernavn = $_GET["brugernavn"];
-
-                        if($_GET["brugernavn"] == $afsender_brugernavn){
+                        
+                        if($_GET["brugernavn"] == $afsender_brugernavn){ // Hvis sandt henter den kun beskederne for det brugernavn der er inputtet i søgefeltet.
                             $afsender_brugernavn = str_replace("'",'',$afsender_brugernavn);
-                            $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."' AND besked.afsender_brugernavn LIKE '%". $afsender_brugernavn."%')";
+                            $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."' AND besked.afsender_brugernavn LIKE '%". $afsender_brugernavn."%') ORDER BY tidspunkt DESC";
+                            // ORDER BY tidspunkt DESC, sorterer efter nyeste beskeder først.
                         }
                     }
 
                     else { //hvis der ikke er indtastet et brugernavn
-                        $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."')";
+                        $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."') ORDER BY tidspunkt DESC";
+                        // ORDER BY tidspunkt DESC, sorterer efter nyeste beskeder først.
                     }
                     
                     //$sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."')";

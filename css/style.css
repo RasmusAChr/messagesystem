@@ -97,6 +97,10 @@ div {
   margin: 0px;
 }
 
+#søg {
+  margin: 0px 0px 16px 0px;
+}
+
 a, a:hover, a:focus, a:active {
   text-decoration: none;
   color: black;
