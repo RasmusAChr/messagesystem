@@ -80,10 +80,19 @@ div {
 
 #beskedmodul {
   text-align: left;
-  padding: 5px 20px 5px 20px;
-  margin: 20px;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 10px;
+}
+
+#beskedIndhold {
+  margin-top: 0px;
 }
 
 #beskedTidspunkt {
   color: grey;
+  font-size: 12px;
+}
+
+#afsender {
+  margin: 0px;
 }
