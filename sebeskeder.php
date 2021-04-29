@@ -18,7 +18,8 @@
                         $afsender_brugernavn = $_GET["brugernavn"];
                         
                         if($_GET["brugernavn"] == $afsender_brugernavn){ // Hvis sandt henter den kun beskederne for det brugernavn der er inputtet i søgefeltet.
-                            $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."' AND besked.afsender_brugernavn = ". $afsender_brugernavn.") ORDER BY tidspunkt DESC";
+                            $afsender_brugernavn = str_replace("'",'',$afsender_brugernavn);
+                            $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."' AND besked.afsender_brugernavn LIKE '%". $afsender_brugernavn."%') ORDER BY tidspunkt DESC";
                             // ORDER BY tidspunkt DESC, sorterer efter nyeste beskeder først.
                         }
                     }
@@ -32,13 +33,13 @@
                     $result = $conn->query($sql); // Her sender den sql strengen afsted og gemmer svaret i en variabel.
                     if ($result->num_rows > 0) { // Tjekker om antallet af rækker i resultatet er over 0. 
                         while ($row = $result->fetch_assoc()) { // Laver resultatet med rækker om til en array man kan håndtere og kører loopet indtil der ikke er flere elementer i array.
-
-                            echo "<div id='beskedmodul'>
+                            $url = "sebeskeder.php?brugernavn=".$row["afsender_brugernavn"]."&brugernavn=".$row["tidspunkt"]."";
+                            echo "<a href=$url><div id='beskedmodul'>
                                     <h2 id=afsender>".$row["afsender_brugernavn"]."</h2>
-                                    <hr>
+                                    <hr style='color:grey;'>
                                     <p id=beskedIndhold>".$row["besked_indhold"]."</p>
                                     <p id=beskedTidspunkt>".$row["tidspunkt"]."</p>
-                                </div>";
+                                </div></a>";
                         }
                     }
                     else { // Hvis resultatet ($result) så er 0 eller under.
