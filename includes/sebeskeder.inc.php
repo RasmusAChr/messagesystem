@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
     }
 
     else {
-        header("location: ../sebeskeder.php?error=emptyinput");
+        header("location: ../sebeskeder.php");
         exit();
     }
 
