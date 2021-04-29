@@ -17,8 +17,8 @@ if (isset($_POST["submit"])) {      // Gør at følgende kode kun kører ved at 
         exit();
     }
 
-    // Send besked
-    sendMessage($conn, $modtagere_array, $besked);  // Sender beskeden med vores "sendMessage" funtion
+    // Sender beskeden med vores "sendMessage" funtion
+    sendMessage($conn, $modtagere_array, $besked);  
 }
 else {
     header("location: ../sendbeskeder.php");
