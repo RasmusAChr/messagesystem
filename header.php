@@ -33,14 +33,16 @@
                             echo "<li><a href='login.php'>Login</a></li>";
                         }
                     ?>
-                    <li><a href='index.php'>Hjem</a></li>
-                    <?php
-                    if (isset($_SESSION["brugernavn"])) {
-                        echo "<li><p style='color:white;position:fixed;left:20px;'>".$_SESSION["brugernavn"]."</p></li>";
-                    }
-                    ?>
                 </ul>
             </div>
         </nav>
+
+        <div id="brugernavnText">
+            <?php
+                if (isset($_SESSION["brugernavn"])) {
+                    echo "<p>".$_SESSION["brugernavn"]."</p>";
+                }
+            ?>
+        </div>
         
         <div class="wrapper">

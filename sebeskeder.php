@@ -8,7 +8,7 @@
                 <!-- Laver kanppen til søgefunktionen -->
                 <form action="includes/sebeskeder.inc.php" method="post"> <!-- Data som bliver sendt med method=post er gemt inde i HTTP forespørgslen. Bruges til sensitiv data. -->
                     <input id="søgBruger" type="text" name="brugernavn" placeholder="Søg efter bruger...">
-                    <button type="submit" name="submit">Søg</button>
+                    <button id="søg" type="submit" name="submit">Søg</button>
                 </form>
                 
                 <?php
