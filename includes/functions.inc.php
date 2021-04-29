@@ -145,9 +145,6 @@ function sendMessage($conn, $modtagere_array, $besked)
         }
     }
 
-    
-
-
     $sql = "INSERT INTO besked (afsender_brugernavn, besked_indhold) VALUES (?,?)";
     $stmt = mysqli_stmt_init($conn);
 
@@ -161,7 +158,7 @@ function sendMessage($conn, $modtagere_array, $besked)
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    // Find besked id på senest sendte besked
+    // Find besked id for den netop oprettede besked record (Seneste id med AUTO INCREMENT)
     $latest_besked_id = mysqli_insert_id($conn);
 
     // Her skal der laves relationstabel med en anden løsning
@@ -182,7 +179,7 @@ function sendMessage($conn, $modtagere_array, $besked)
     
     
 
-    // Når beskeden er sendt - allersidste
+    // Når beskeden er sendt
     header("location: ../sendbeskeder.php?error=none");
     exit();
 }
