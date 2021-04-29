@@ -1,6 +1,7 @@
 <?php
 
-if (isset($_POST["submit"])) {
+if (isset($_POST["submit"])) {      // Gør at følgende kode kun kører ved at trykke på send knappen
+                                    // Ellers kan man skrive det i URL'en og stadig kører denne kode
 
     $modtagere = $_POST["modtager"];
     $modtagere_array = array_map('trim', preg_split("/,/", $modtagere));

@@ -1,5 +1,5 @@
 <!-- Dette dokument indeholder start tags og header for siden -->
-<!-- Bliver inkluderet nederest på hver side -->
+<!-- Bliver inkluderet øverst på hver side -->
 
 <?php
    session_start();
