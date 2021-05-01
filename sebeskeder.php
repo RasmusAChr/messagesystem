@@ -25,7 +25,7 @@
                     }
 
                     else { //hvis der ikke er indtastet et brugernavn
-                        $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."') ORDER BY tidspunkt DESC";
+                        $sql = "SELECT besked_id, besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."') ORDER BY tidspunkt DESC";
                         // ORDER BY tidspunkt DESC, sorterer efter nyeste beskeder først.
                     }
                     
@@ -33,11 +33,13 @@
                     $result = $conn->query($sql); // Her sender den sql strengen afsted og gemmer svaret i en variabel.
                     if ($result->num_rows > 0) { // Tjekker om antallet af rækker i resultatet er over 0. 
                         while ($row = $result->fetch_assoc()) { // Laver resultatet med rækker om til en array man kan håndtere og kører loopet indtil der ikke er flere elementer i array.
-                            $url = "sebeskeder.php?brugernavn=".$row["afsender_brugernavn"]."&brugernavn=".$row["tidspunkt"]."";
+                            $url = "besked.php?brugernavn=".$row["afsender_brugernavn"]."&besked_id=".$row["besked_id"]."";
+                            $besked_indhold = $row["besked_indhold"]; // Gemmer beskedens indhold i en variabel.
+                            $besked_indhold = substr($besked_indhold,0,20); // Laver variablen om således man kun kan se 20 tegn.
                             echo "<a href=$url><div id='beskedmodul'>
                                     <h2 id=afsender>".$row["afsender_brugernavn"]."</h2>
                                     <hr style='color:grey;'>
-                                    <p id=beskedIndhold>".$row["besked_indhold"]."</p>
+                                    <p id=beskedIndhold>".$besked_indhold."...</p>
                                     <p id=beskedTidspunkt>".$row["tidspunkt"]."</p>
                                 </div></a>";
                         }
