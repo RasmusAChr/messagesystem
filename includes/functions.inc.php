@@ -178,7 +178,6 @@ function sendMessage($conn, $modtagere_array, $besked)
     mysqli_stmt_close($stmt);
     
     
-
     // Når beskeden er sendt
     header("location: ../sendbeskeder.php?error=none");
     exit();
