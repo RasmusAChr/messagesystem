@@ -136,15 +136,20 @@ function sendMessage($conn, $modtagere_array, $besked)
     session_start();        // Måske riski (research) https://www.w3schools.com/php/php_mysql_prepared_statements.asp
     $afsender = $_SESSION["brugernavn"];
 
+    // Tjekker om brugernavne findes
     foreach($modtagere_array as $value){
         $ModtagerEksistere = brugernavneksisterer($conn, $value);
 
+        // Hvis en bruger ikke findes bliver der lavet en error
+        // som vi gør noget ved på sendbeskeder.php
         if ($ModtagerEksistere == false) {
             header("location: ../sendbeskeder.php?error=wrongmodtager");
             exit();
         }
     }
+    // -- Indsætter beskeden og afsender i 'besked' tabellen --
 
+    // Starter et 'prepared statemnt'
     $sql = "INSERT INTO besked (afsender_brugernavn, besked_indhold) VALUES (?,?)";
     $stmt = mysqli_stmt_init($conn);
 
@@ -154,14 +159,17 @@ function sendMessage($conn, $modtagere_array, $besked)
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $afsender, $besked);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
+    mysqli_stmt_bind_param($stmt, "ss", $afsender, $besked);    // Binder variabler til 'prepared statemnt'
+    mysqli_stmt_execute($stmt);                                 // Kører det 'prepared statemnt'
+    mysqli_stmt_close($stmt);                                   // Lukker 'prepared statemnt'
 
-    // Find besked id for den netop oprettede besked record (Seneste id med AUTO INCREMENT)
+    // Finder besked id for den netop oprettede besked record (Seneste id med AUTO INCREMENT)
     $latest_besked_id = mysqli_insert_id($conn);
 
-    // Her skal der laves relationstabel med en anden løsning
+
+    // -- Indsætter relationen mellem afsender og modtagere (kan håndtere flere modtagere) --
+    
+    // Starter et 'prepared statemnt'
     $sql = "INSERT INTO besked_modtager (besked_id, modtager_brugernavn) VALUES (?,?)";
     $stmt = mysqli_stmt_init($conn);
 
@@ -171,12 +179,13 @@ function sendMessage($conn, $modtagere_array, $besked)
         exit();
     }
 
+    // Binder og kører 'prepared statemnt'
+    // Gør at alle modtagere får en relation til besked_id'et
     foreach($modtagere_array as $value){
         mysqli_stmt_bind_param($stmt, "is", $latest_besked_id, $value);
         mysqli_stmt_execute($stmt);
     }
-    mysqli_stmt_close($stmt);
-    
+    mysqli_stmt_close($stmt);   // Lukker 'prepared statemnt'
     
     // Når beskeden er sendt
     header("location: ../sendbeskeder.php?error=none");
