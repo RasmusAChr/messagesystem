@@ -5,7 +5,7 @@
             <section class="sebeskeder-section">
                 <h1>Se beskeder</h1>
 
-                <!-- Laver kanppen til søgefunktionen -->
+                <!-- Laver knappen og feltet til søgefunktionen -->
                 <form action="includes/sebeskeder.inc.php" method="post"> <!-- Data som bliver sendt med method=post er gemt inde i HTTP forespørgslen. Bruges til sensitiv data. -->
                     <input id="søgBruger" type="text" name="brugernavn" placeholder="Søg efter bruger...">
                     <button id="søg" type="submit" name="submit">Søg</button>

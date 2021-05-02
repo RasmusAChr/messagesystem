@@ -6,6 +6,7 @@
                 <h1>Send beskeder</h1>
                 <p>På denne side kommer man til at kunne oprette og sende beskeder</p>
                 
+                <!-- Input felt og knap til bruger kan sende besked-->
                 <form action="includes/sendbeskeder.inc.php" method="post"> <!-- Data som bliver sendt med method=post er gemt inde i HTTP forespørgslen. Bruges til sensitiv data. -->
                     <input type="text" name="modtager" placeholder="Modtager...">
                     <textarea id="beskedomraade" name="besked" rows="4" placeholder="Skriv din besked her..."></textarea>
@@ -13,7 +14,6 @@
                 </form>
 
                 <?php 
-                    // Tjek for errors i url (se andre sider for inspiration)
                     // Tjekker for fejl i url og skriver noget tekst til brugeren om hvad der er sket af fejl (hvis det er en fejl)
 
                     if (isset($_GET["error"])) { // Tjekker om der kommer en fejl.
@@ -26,7 +26,7 @@
                         else if ($_GET["error"] == "stmtfailed") { // Tjekker om fejlen skyldes et forkert login.
                             echo "<p>Der er en fejl med forbindelsen til databasen</p>";
                         }
-                        else if ($_GET["error"] == "none") { // Tjekker om fejlen skyldes et forkert login.
+                        else if ($_GET["error"] == "none") { // Hvis der ikke er nogle fejl
                             echo "<p>Beskeden er sendt</p>";
                         }
                     }
