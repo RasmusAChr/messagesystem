@@ -30,7 +30,7 @@
                     if ($result->num_rows > 0) { // Tjekker om antallet af rækker i resultatet er over 0. 
                         while ($row = $result->fetch_assoc()) { // Laver resultatet med rækker om til en array man kan håndtere og kører loopet indtil der ikke er flere elementer i array.
                             echo "<div id='beskedmodul'>
-                                    <h2 id=afsender>Fra ".$row["afsender_brugernavn"]."</h2>
+                                    <h2 id=afsender>".$row["afsender_brugernavn"]."</h2>
                                     <hr style='color:grey;'>
                                     <p id=beskedIndhold>".$row["besked_indhold"]."</p>
                                     <p id=beskedTidspunkt>".$row["tidspunkt"]."</p>
