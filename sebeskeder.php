@@ -7,7 +7,7 @@
 
                 <!-- Laver knappen og feltet til søgefunktionen -->
                 <form action="includes/sebeskeder.inc.php" method="post"> <!-- Data som bliver sendt med method=post er gemt inde i HTTP forespørgslen. Bruges til sensitiv data. -->
-                    <input id="søgBruger" type="text" name="brugernavn" placeholder="Søg efter bruger...">
+                    <input id="søgBruger" type="text" name="brugernavn" placeholder="Søg efter bruger... (brug komma til flere modtagere)">
                     <button id="søg" type="submit" name="submit">Søg</button>
                 </form>
                 
