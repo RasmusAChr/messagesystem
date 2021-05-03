@@ -6,7 +6,6 @@
             
             <section class="index-intro">
                 <h1>Startside</h1>
-                <p>Dette er en ret nice side som skal vise en loginsystem - wuhu.</p>
 
                 <?php
                     if (isset($_SESSION["brugernavn"])) { // Hvis brugeren er logget ind, så vis nedenstående (Hvis sessionens brugernavn er sat, så er udsagnet true).
