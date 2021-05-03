@@ -29,7 +29,6 @@
                         // ORDER BY tidspunkt DESC, sorterer efter nyeste beskeder først.
                     }
                     
-                    //$sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."')";
                     $result = $conn->query($sql); // Her sender den sql strengen afsted og gemmer svaret i en variabel.
                     if ($result->num_rows > 0) { // Tjekker om antallet af rækker i resultatet er over 0. 
                         while ($row = $result->fetch_assoc()) { // Laver resultatet med rækker om til en array man kan håndtere og kører loopet indtil der ikke er flere elementer i array.
