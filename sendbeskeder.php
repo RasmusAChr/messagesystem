@@ -8,7 +8,7 @@
                 
                 <!-- Input felt og knap til bruger kan sende besked-->
                 <form action="includes/sendbeskeder.inc.php" method="post"> <!-- Data som bliver sendt med method=post er gemt inde i HTTP forespørgslen. Bruges til sensitiv data. -->
-                    <input type="text" name="modtager" placeholder="Modtager...">
+                    <input type="text" name="modtager" placeholder="Modtager... (brug komma til flere modtagere)">
                     <textarea id="beskedomraade" name="besked" rows="4" placeholder="Skriv din besked her..."></textarea>
                     <button type="submit" name="submit">Send</button>
                 </form>
