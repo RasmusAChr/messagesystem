@@ -16,6 +16,8 @@
                     }
                 ?>
 
+                <p>Velkommen til vores webbaserede beskedsystem, hvor du kan sende og modtage beskeder. Chat med dine venner, familie eller andre bekendte.</p>
+
             </section>
 
 <!-- Her bliver footeren inkluderet -->
