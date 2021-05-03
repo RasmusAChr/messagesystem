@@ -19,7 +19,7 @@
                         
                         if($_GET["brugernavn"] == $afsender_brugernavn){ // Hvis sandt henter den kun beskederne for det brugernavn der er inputtet i søgefeltet.
                             $afsender_brugernavn = str_replace("'",'',$afsender_brugernavn);
-                            $sql = "SELECT besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."' AND besked.afsender_brugernavn LIKE '%". $afsender_brugernavn."%') ORDER BY tidspunkt DESC";
+                            $sql = "SELECT besked_id, besked_indhold, afsender_brugernavn, tidspunkt FROM besked WHERE besked.besked_id in (SELECT besked_modtager.besked_id FROM besked_modtager WHERE besked_modtager.modtager_brugernavn = '".$_SESSION['brugernavn']."' AND besked.afsender_brugernavn LIKE '%". $afsender_brugernavn."%') ORDER BY tidspunkt DESC";
                             // ORDER BY tidspunkt DESC, sorterer efter nyeste beskeder først.
                         }
                     }
