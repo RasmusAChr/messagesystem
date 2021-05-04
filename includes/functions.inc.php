@@ -1,6 +1,6 @@
 <?php
 
-function emptyInputSignup($brugernavn, $fornavn, $efternavn, $password, $passwordgentag) 
+function  emptyInputSignup($brugernavn, $fornavn, $efternavn, $password, $passwordgentag) 
 {
     $result; // Laver variabel som skal indeholde et resultat.
     if (empty($brugernavn) || empty($fornavn) || empty($efternavn) || empty($password) || empty($passwordgentag)) // Tjekker om nogle af felterne er tomme.
