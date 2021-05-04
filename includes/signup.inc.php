@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) { // Hvis brugeren har trykket på registrer knappe
         exit();
     }
     if (brugernavneksisterer($conn, $brugernavn) != false) {
-        header("location: ../signup.php?error=usernametaken");
+        header("location: ../signup.php?error=brugernavneksisterer");
         exit();
     }
     
