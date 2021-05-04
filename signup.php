@@ -15,22 +15,33 @@
 
                 <?php
                 if (isset($_GET["error"])) { // Tjekker om der kommer en fejl.
-                    if($_GET["error"] == "emptyinput") { // Tjekker om fejlen skyldes manglende udfyldning.
+                    
+                    // Tjekker om fejlen skyldes manglende udfyldning.
+                    if($_GET["error"] == "emptyinput") { 
                         echo "<p>Udfyld alle felter.</p>";
                     }
-                    else if ($_GET["error"] == "invalidbrugernavn") { // Tjekker om fejlen skyldes et forkert brugernavn.
+
+                    // Tjekker om fejlen skyldes et forkert brugernavn.
+                    else if ($_GET["error"] == "invalidbrugernavn") { 
                         echo "<p>Ugyldigt brugernavn</p>";
                     }
-                    else if ($_GET["error"] == "passworddontmatch") { // Tjekker om fejlen skyldes at kodeordet er forkert.
+
+                    // Tjekker om fejlen skyldes at kodeordet er forkert.
+                    else if ($_GET["error"] == "passworddontmatch") { 
                         echo "<p>Kodeord stemmer ikke overens.</p>";
                     }
-                    else if ($_GET["error"] == "stmtfailed") { // Tjekker om fejlen skyldes en fejl i et prepared statement (en sql streng som skal udføres mange gange, og derfor er mere effektiv end en normal sql streng).
+                    // Tjekker om fejlen skyldes en fejl i et prepared statement
+                    else if ($_GET["error"] == "stmtfailed") { 
                         echo "<p>Noget gik galt.</p>";
                     }
-                    else if ($_GET["error"] == "brugernavneksisterer") { // Tjekker om fejlen skyldes at brugernavnet allerede eksisterer.
+
+                    // Tjekker om fejlen skyldes at brugernavnet allerede eksisterer.
+                    else if ($_GET["error"] == "brugernavneksisterer") { 
                         echo "<p>Brugernavnet eksistrer allerede.</p>";
                     }
-                    else if ($_GET["error"] == "none") { // Ingen fejl.
+                    
+                    // Ingen fejl.
+                    else if ($_GET["error"] == "none") { 
                         echo "<p>Registrering fuldført.</p>";
                     }
                 }
