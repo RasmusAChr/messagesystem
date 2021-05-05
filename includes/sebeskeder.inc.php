@@ -7,8 +7,9 @@ if (isset($_POST["submit"])) {
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
 
-    // Tjekker for fejl (error handelers)
+    // Tjekker for fejl (error handler)
 
+    // Hvis det angivet brugernavn ikke er tomt.
     if (empty($brugernavn) == false) {
 
         header("location: ../sebeskeder.php?brugernavn='".$brugernavn."'");
@@ -16,6 +17,7 @@ if (isset($_POST["submit"])) {
 
     }
 
+    // Hvis det angivet brugernavn er tomt.
     else {
         header("location: ../sebeskeder.php");
         exit();

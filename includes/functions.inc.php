@@ -1,6 +1,6 @@
 <?php
 
-function  emptyInputSignup($brugernavn, $fornavn, $efternavn, $password, $passwordgentag) 
+function emptyInputSignup($brugernavn, $fornavn, $efternavn, $password, $passwordgentag) 
 {
     $result; // Laver variabel som skal indeholde et resultat.
     if (empty($brugernavn) || empty($fornavn) || empty($efternavn) || empty($password) || empty($passwordgentag)) // Tjekker om nogle af felterne er tomme.
@@ -46,7 +46,7 @@ function brugernavneksisterer($conn, $brugernavn)
 {
     // Laver prepared statement for at undgå SQL injection.
     $sql = "SELECT * FROM bruger WHERE brugernavn = ?;";
-    $stmt = mysqli_stmt_init($conn);
+    $stmt = mysqli_stmt_init($conn); // Starter en forbindelse til databasen.
 
     // Tjekker om forbindelsen fejler
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -54,11 +54,14 @@ function brugernavneksisterer($conn, $brugernavn)
         exit();
     }
 
+    // Binder parameterne og eksekvere SQL strengen. 
     mysqli_stmt_bind_param($stmt, "s", $brugernavn);
     mysqli_stmt_execute($stmt);
 
+    // Gem resultaterne
     $resultData = mysqli_stmt_get_result($stmt);
 
+    // Gemmer resultaterne i en array og returner resultaterne. 
     if ($row = mysqli_fetch_assoc($resultData)) {
         return $row;
     }
@@ -67,14 +70,14 @@ function brugernavneksisterer($conn, $brugernavn)
         return $result;
     }
 
-    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt); // Luk for det prepared statement
 }
 
 function createUser($conn, $brugernavn, $fornavn, $efternavn, $password) 
 {
     // Laver prepared statement for at undgå SQL injection.
     $sql = "INSERT INTO bruger (brugernavn, fornavn, efternavn, kodeord) VALUES (?,?,?,?);";
-    $stmt = mysqli_stmt_init($conn);
+    $stmt = mysqli_stmt_init($conn); // Starter en forbindelse til databasen.
 
     // Tjekker om forbindelsen fejler
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -85,6 +88,7 @@ function createUser($conn, $brugernavn, $fornavn, $efternavn, $password)
     // Hasher password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+    // Binder parameterne, eksekvere SQL strengen og lukker det prepared statement. 
     mysqli_stmt_bind_param($stmt, "ssss", $brugernavn, $fornavn, $efternavn, $hashedPassword);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
@@ -98,7 +102,7 @@ function createUser($conn, $brugernavn, $fornavn, $efternavn, $password)
 function emptyInputLogin($brugernavn, $password) 
 {
     $result; // Laver variabel som skal indeholde et resultat.
-    if (empty($brugernavn) || empty($password)) {
+    if (empty($brugernavn) || empty($password)) { // Tjekker om variablerne er tomme
         $result = true;
     }
     else {
@@ -108,24 +112,28 @@ function emptyInputLogin($brugernavn, $password)
 }
 
 function loginUser($conn, $brugernavn, $password) {
-    $brugernavnEksistere = brugernavneksisterer($conn, $brugernavn);
+    $brugernavnEksistere = brugernavneksisterer($conn, $brugernavn); // Tjekker om brugernavnet eksisterer
 
+    // Hvis brugernavnet ikke eksistrer
     if ($brugernavnEksistere == false) {
         header("location: ../login.php?error=wronglogin");
         exit();
     }
 
-    $hashedPassword = $brugernavnEksistere["kodeord"];
-    $checkPassword = password_verify($password, $hashedPassword);
+    $hashedPassword = $brugernavnEksistere["kodeord"]; // Gemmer brugerens password
+    $checkPassword = password_verify($password, $hashedPassword); // Tjekker om de to passwords stemmer overens
 
+    // Hvis passwordet ikke stemmer overens
     if ($checkPassword == false) {
         header("location: ../login.php?error=wronglogin");
         exit();
     }
+
+    // Hvis passwordet stemmer overens
     else if ($checkPassword == true) {
-        session_start();
-        $_SESSION["brugernavn"] = $brugernavnEksistere["brugernavn"];
-        $_SESSION["fornavn"] = $brugernavnEksistere["fornavn"];
+        session_start(); // Starter en session
+        $_SESSION["brugernavn"] = $brugernavnEksistere["brugernavn"]; // Laver sessions brugernavn til det angivet
+        $_SESSION["fornavn"] = $brugernavnEksistere["fornavn"]; // Laver sessions fornavn til brugerens fornavn
         header("location: ../index.php");
         exit();
     }
@@ -133,25 +141,25 @@ function loginUser($conn, $brugernavn, $password) {
 
 function sendMessage($conn, $modtagere_array, $besked) 
 {
-    session_start();        // Måske riski (research) https://www.w3schools.com/php/php_mysql_prepared_statements.asp
+    session_start(); // Starter en session
     $afsender = $_SESSION["brugernavn"];
 
-    // Tjekker om brugernavne findes
+    // Tjekker om brugernavn(ene) findes
     foreach($modtagere_array as $value){
         $ModtagerEksistere = brugernavneksisterer($conn, $value);
 
         // Hvis en bruger ikke findes bliver der lavet en error
-        // som vi gør noget ved på sendbeskeder.php
         if ($ModtagerEksistere == false) {
             header("location: ../sendbeskeder.php?error=wrongmodtager");
             exit();
         }
     }
+
     // -- Indsætter beskeden og afsender i 'besked' tabellen --
 
-    // Starter et 'prepared statemnt'
+    // Starter et prepared statement
     $sql = "INSERT INTO besked (afsender_brugernavn, besked_indhold) VALUES (?,?)";
-    $stmt = mysqli_stmt_init($conn);
+    $stmt = mysqli_stmt_init($conn); // Starter forbindelsen til databasen
 
     // Tjekker om forbindelsen fejler
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -159,9 +167,9 @@ function sendMessage($conn, $modtagere_array, $besked)
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $afsender, $besked);    // Binder variabler til 'prepared statemnt'
-    mysqli_stmt_execute($stmt);                                 // Kører det 'prepared statemnt'
-    mysqli_stmt_close($stmt);                                   // Lukker 'prepared statemnt'
+    mysqli_stmt_bind_param($stmt, "ss", $afsender, $besked);    // Binder variabler til prepared statement
+    mysqli_stmt_execute($stmt);                                 // Kører det prepared statement
+    mysqli_stmt_close($stmt);                                   // Lukker prepared statement
 
     // Finder besked id for den netop oprettede besked record (Seneste id med AUTO INCREMENT)
     $latest_besked_id = mysqli_insert_id($conn);
